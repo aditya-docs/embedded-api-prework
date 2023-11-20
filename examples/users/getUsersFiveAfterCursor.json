@@ -1,0 +1,54 @@
+{
+  "data": {
+    "users": {
+      "edges": [
+        {
+          "node": {
+            "name": "Dwight Schrute",
+            "id": "1a71daf1-XXXX-XXXX-XXXX-dbb4ab325a55",
+            "externalUserId": "324776789-XXXX-XXXX-XXXX-343fd323"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        },
+        {
+          "node": {
+            "name": "Pam Beesly",
+            "id": "23432k3j-XXXX-XXXX-XXXX-dbb4ab32223a",
+            "externalUserId": "234322323-XXXX-XXXX-XXXX-343fd323"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        },
+        {
+          "node": {
+            "name": "Jim Halpert",
+            "id": "3497654k-XXXX-XXXX-XXXX-db353534kjh",
+            "externalUserId": "0998759-XXXX-XXXX-XXXX-3435678d"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        },
+        {
+          "node": {
+            "name": "Angela Martin",
+            "id": "09078943d-XXXX-XXXX-XXXX-dbcisij392",
+            "externalUserId": "9689843832-XXXX-XXXX-XXXX-35387djh32"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        },
+        {
+          "node": {
+            "name": "Kevin Malone",
+            "id": "fhfd34643-XXXX-XXXX-XXXX-4534sdg46",
+            "externalUserId": "4673213d-XXXX-XXXX-XXXX-jtg5642s4"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1",
+        "hasPreviousPage": false,
+        "startCursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+      }
+    }
+  }
+}

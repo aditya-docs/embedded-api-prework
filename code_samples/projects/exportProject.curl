@@ -1,0 +1,10 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($projectId: ID!) {\n  exportProject (input: {\n    projectId: $projectId,\n    exportSolution: true\n  }) {\n    exportedProjectJson\n  }\n}",
+    "variables": {
+      "projectId": "944dxxx-xxx-xxx-xxx-xxx222eb99"
+    }
+  }'

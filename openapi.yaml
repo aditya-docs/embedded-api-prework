@@ -1,0 +1,1943 @@
+openapi: 3.0.3
+info:
+  title: Tray Embedded APIs
+  version: 1.0.0
+  x-logo:
+    url: https://gist.githubusercontent.com/aditya-docs/af48346fe0b5c9374b30f0dba72a5fd3/raw/b4e07c9128134ae9bd17ff3024c85afb7fe1370d/tray-logo.svg
+    altText: Tray.io logo
+servers:
+  - url: https://tray.io/graphql
+    description: US
+  - url: https://eu1.tray.io/graphql
+    description: EU
+  - url: https://ap1.tray.io/graphql
+    description: APAC
+tags:
+  - name: overview
+    x-displayName: Overview
+    description:
+      $ref: descriptions/tags/overview.md
+  - name: postmanCollection
+    x-displayName: Use our Postman collection
+    description:
+      $ref: descriptions/tags/postmanCollection.html
+  - name: insomniaCollection
+    x-displayName: Use our Insomnia collection
+    description:
+      $ref: descriptions/tags/insomniaCollection.md
+  - name: authentication
+    x-displayName: How to Authenticate
+    description:
+      $ref: descriptions/tags/authentication.md
+  - name: pagination
+    x-displayName: Pagination
+    description:
+      $ref: descriptions/tags/pagination.md
+  - name: rateLimiting
+    x-displayName: Rate Limiting
+    description:
+      $ref: descriptions/tags/rateLimiting.md
+  - name: regionality
+    x-displayName: Regionality
+    description:
+      $ref: descriptions/tags/regionality.md
+  - name: users
+    x-displayName: Users
+    description: Users are the end users of your integrations
+  - name: userQueries
+    x-displayName: Queries
+    description: Queries affecting Users of your application
+  - name: userMutations
+    x-displayName: Mutations
+    description: Mutations affecting Users of your application
+  - name: authentications
+    x-displayName: Authentications
+    description: Authentications represent the auth data used for authenticating to all the services that you would be integrating with Tray.
+  - name: authenticationQueries
+    x-displayName: Queries
+    description: Query for retrieving the authentications used by your end users. You can also retrieve the auths created within your main embedded org by passing the Master token in the headers.
+  - name: authenticationMutations
+    x-displayName: Mutations
+    description: Mutations for modifying the authentications used by your end users. You can also modify the auths created within your main embedded org by passing the Master token in the headers.
+  - name: solutions
+    x-displayName: Solutions
+    description: Solutions represent the integrations you have built with Tray.
+  - name: solutionQueries
+    x-displayName: Queries
+    description: Query for retrieving the solutions published by you.
+  - name: solutionInstances
+    x-displayName: Solution Instances
+    description: Solution Instances are the end user's configuration of your Solutions. Instances contain their own auths and config data.
+  - name: solutionInstanceQueries
+    x-displayName: Queries
+    description: Query for retrieving the solution instances used by your end users.
+  - name: solutionInstanceMutations
+    x-displayName: Mutations
+    description: Mutations for modifying the solution instances used by your end users.
+  - name: projects
+    x-displayName: Projects
+    description: Project represents a collection of workflows that make up the integration.
+  - name: projectMutations
+    x-displayName: Mutations
+    description: Mutations for importing and exporting projects in your Tray org.
+  - name: workflows
+    x-displayName: Workflows
+    description: Workflow represent a set of connector steps in Tray that perform a task.
+  - name: workflowMutations
+    x-displayName: Mutations
+    description: Mutations for importing and exporting workflows in your Tray org.
+  - name: callConnector
+    x-displayName: Call Connector
+    description: Mutations for importing and exporting workflows in your Tray org.
+  - name: callConnectorMutations
+    x-displayName: Mutations
+    description: Mutation for calling a Tray connector.
+x-tagGroups:
+  - name: introduction
+    x-displayName: Introduction
+    tags:
+      - overview
+      - authentication
+      - pagination
+      - rateLimiting
+      - postmanCollection
+      - insomniaCollection
+      - regionality
+  - name: users
+    x-displayName: Users
+    tags:
+      - users
+      - userQueries
+      - userMutations
+  - name: authentications
+    x-displayName: Authentications
+    tags:
+      - authentications
+      - authenticationQueries
+      - authenticationMutations
+  - name: solutions
+    x-displayName: Solutions
+    tags:
+      - solutions
+      - solutionQueries
+  - name: solutionInstances
+    x-displayName: Solution Instances
+    tags:
+      - solutionInstances
+      - solutionInstanceQueries
+      - solutionInstanceMutations
+  - name: projects
+    x-displayName: Projects
+    tags:
+      - projects
+      - projectMutations
+  - name: workflows
+    x-displayName: Workflows
+    tags:
+      - workflows
+      - workflowMutations
+  - name: connector
+    x-displayName: Call Connector
+    tags:
+      - callConnector
+      - callConnectorMutations
+paths:
+  #Users endpoints start here
+  "/":
+    post:
+      tags:
+        - userQueries
+      summary: Get users (master token)
+      description:
+        $ref: descriptions/endpoints/users/getUsers.md
+      operationId: get-users
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/getUsers.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              get-all-users:
+                summary: Get all users
+                value:
+                  {
+                    "query": "query {\n    users {\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+              get-user-by-id:
+                summary: Get user by id
+                value:
+                  {
+                    "query": "query {\n    users (criteria: {userId: \"13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4\"}){\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+              get-user-by-externalId:
+                summary: Get user by externalId
+                value:
+                  {
+                    "query": "query {\n    users (criteria: {externalUserId: \"13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4\"}){\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+              get-users-after-cursor:
+                summary: Get users after cursor
+                value:
+                  {
+                    "query": "query {\n    users (after: \"MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0\"){\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+              get-first-2-users:
+                summary: Get first 2 users
+                value:
+                  {
+                    "query": "query {\n    users (first: 2){\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+              get-first-5-users-after-cursor:
+                summary: Get first 5 users after cursor
+                value:
+                  {
+                    "query": "query {\n    users (first: 5, after: \"MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0\"){\n        edges {\n            node {\n                name\n                id\n                externalUserId\n            }\n            cursor\n        }\n        pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n        }\n    }\n}",
+                    "variables": {},
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Returns the end users from your embedded org
+          content:
+            application/json:
+              examples:
+                get-all-users:
+                  summary: Get all users
+                  value:
+                    $ref: examples/users/getUsersAll.json
+                get-user-by-id:
+                  summary: Get user by id
+                  value:
+                    $ref: examples/users/getUsersById.json
+                get-user-by-externalId:
+                  summary: Get user by externalId
+                  value:
+                    $ref: examples/users/getUsersByExternalId.json
+                get-users-after-cursor:
+                  summary: Get users after cursor
+                  value:
+                    $ref: examples/users/getUsersAfterCursor.json
+                get-first-2-users:
+                  summary: Get first 2 users
+                  value:
+                    $ref: examples/users/getUsersFirstTwo.json
+                get-first-5-users-after-cursor:
+                  summary: Get first 5 users after cursor
+                  value:
+                    $ref: examples/users/getUsersFiveAfterCursor.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/ ":
+    post:
+      tags:
+        - userMutations
+      summary: Create new user (master token)
+      description:
+        $ref: descriptions/endpoints/users/createUser.md
+      operationId: create-user
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/createNewUser.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              create-billable-user:
+                summary: Create user
+                value:
+                  {
+                    "query": "mutation($name: String!, $externalUserId: String!) {\n  createExternalUser(input: { \n      name: $name, \n      externalUserId: $externalUserId  \n    }) {\n      userId\n  }\n}",
+                    "variables":
+                      {
+                        "name": "Dwight Schrute",
+                        "externalUserId": "my-apps-user-id-for-dwight",
+                      },
+                  }
+              create-test-user:
+                summary: Create test user
+                value:
+                  {
+                    "query": "mutation($name: String!, $externalUserId: String!, $isTestUser: Boolean) {\n  createExternalUser(input: { \n      name: $name, \n      externalUserId: $externalUserId,\n      isTestUser: $isTestUser\n    }) {\n      userId\n  }\n}",
+                    "variables":
+                      {
+                        "name": "Dwight Schrute",
+                        "externalUserId": "my-apps-user-id-for-dwight",
+                        "isTestUser": true,
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Returns the userId of the newly created user
+          content:
+            application/json:
+              examples:
+                create-billable-user:
+                  summary: Create billable user
+                  value:
+                    $ref: examples/users/createBillableUser.json
+                create-test-user:
+                  summary: Create test user
+                  value:
+                    $ref: examples/users/createTestUser.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/  ":
+    post:
+      tags:
+        - userMutations
+      summary: Create user token (master token)
+      description:
+        $ref: descriptions/endpoints/users/createUserToken.md
+      operationId: create-user-token
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/createUserToken.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              create-user-token:
+                summary: Create user token
+                value:
+                  {
+                    "query": "mutation ($userId: ID!) {\n  authorize(input: {\n      userId: $userId\n  }) {\n    accessToken\n  }\n}",
+                    "variables":
+                      { "userId": "d869ec65-XXXX-XXXX-XXXX-ac5c1a3958b6" },
+                  }
+              create-user-token-with-clientMutationId:
+                summary: Create user token with clientMutationId
+                value:
+                  {
+                    "query": "mutation ($userId: ID!, $clientMutationId: String) {\n  authorize(input: {\n      userId: $userId,\n      clientMutationId: $clientMutationId #OPTIONAL - only needed for legacy Relay & Apollo clients\n  }) {\n    accessToken\n    clientMutationId #OPTIONAL\n  }\n}",
+                    "variables":
+                      {
+                        "userId": "d869ec65-XXXX-XXXX-XXXX-ac5c1a3958b6",
+                        "clientMutationId": "my-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Returns the accessToken of the user
+          content:
+            application/json:
+              examples:
+                create-user-token:
+                  summary: Create user token
+                  value:
+                    $ref: examples/users/createUserToken.json
+                create-user-token-with-clientMutationId:
+                  summary: Create user token with clientMutationId
+                  value:
+                    $ref: examples/users/createUserTokenWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/   ":
+    post:
+      tags:
+        - userMutations
+      summary: Create Auth/Config dialog Authorization Code (master token)
+      description:
+        $ref: descriptions/endpoints/users/createConfigWizardAuthCode.md
+      operationId: create-config-wizard-auth-code
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/createConfigWizardAuthCode.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              create-config-wizard-auth-code:
+                summary: Create config wizard auth code
+                value:
+                  {
+                    "query": "mutation ($userId: ID!) {\n  generateAuthorizationCode( input: {\n    userId: $userId\n  }) {\n    authorizationCode\n  }\n}",
+                    "variables":
+                      { "userId": "d869ec65-XXXX-XXXX-XXXX-ac5c1a3958b6" },
+                  }
+              create-config-wizard-auth-code-with-clientMutationId:
+                summary: Create config wizard auth code with clientMutationId
+                value:
+                  {
+                    "query": "mutation ($userId: ID!, $clientMutationId: String) {\n  generateAuthorizationCode( input: {\n    userId: $userId,\n    clientMutationId: $clientMutationId\n  }) {\n    authorizationCode\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "userId": "d869ec65-XXXX-XXXX-XXXX-ac5c1a3958b6",
+                        "clientMutationId": "my-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Returns the one time use authorizationCode for the user
+          content:
+            application/json:
+              examples:
+                create-config-wizard-auth-code:
+                  summary: Create config wizard auth code
+                  value:
+                    $ref: examples/users/createConfigWizardAuthCode.json
+                create-config-wizard-auth-code-with-clientMutationId:
+                  summary: Create config wizard auth code with clientMutationId
+                  value:
+                    $ref: examples/users/createConfigWizardAuthCodeWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/    ":
+    post:
+      tags:
+        - userMutations
+      summary: Update user (master token)
+      description:
+        $ref: descriptions/endpoints/users/updateUser.md
+      operationId: update-user
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/updateUserEnable.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              update-user:
+                summary: Update user
+                value:
+                  {
+                    "query": "mutation  ($userId: ID!, $isTestUser: Boolean ){\n   updateExternalUser(input: {\n      userId: $userId,\n      isTestUser: $isTestUser\n  }) {\n    user{\n\t\t\tname\n\t\t\tid\n\t\t\texternalUserId\n\t\t\tisTestUser\n\t\t}\n  }\n}",
+                    "variables":
+                      {
+                        "userId": "53824943-XXXX-XXXX-XXXX-088aee14038e",
+                        "isTestUser": true,
+                      },
+                  }
+              update-user-with-clientMutationId:
+                summary: Update user with clientMutationId
+                value:
+                  {
+                    "query": "mutation  ($userId: ID! $isTestUser: Boolean $clientMutationId: String){\n   updateExternalUser(input: {\n      userId: $userId,\n      isTestUser: $isTestUser,\n      clientMutationId: $clientMutationId\n  }) {\n    user{\n\t\t\tname\n\t\t\tid\n\t\t\texternalUserId\n\t\t\tisTestUser\n            clientMutationId\n\t\t}\n  }\n}",
+                    "variables":
+                      {
+                        "userId": "ad15b7ae-4c2d-4574-bf4f-5e8e1097a6e9",
+                        "isTestUser": true,
+                        "clientMutationId": "some-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Updates the user with the new data provided
+          content:
+            application/json:
+              examples:
+                update-user:
+                  summary: Update user
+                  value:
+                    $ref: examples/users/updateUser.json
+                update-user-with-clientMutationId:
+                  summary: Update user with clientMutationId
+                  value:
+                    $ref: examples/users/updateUserWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/     ":
+    post:
+      tags:
+        - userMutations
+      summary: Delete user (master token)
+      description:
+        $ref: descriptions/endpoints/users/deleteUser.md
+      operationId: delete-user
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/users/deleteUser.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              delete-user:
+                summary: Delete user
+                value:
+                  {
+                    "query": "mutation {\n  removeExternalUser(input: {userId: $userId}) {\n      clientMutationId # REQUIRED - must specify as return field, not required to provide this in mutation function\n  }\n}",
+                    "variables":
+                      { "userId": "53824943-XXXX-XXXX-XXXX-088aee14038e" },
+                  }
+              delete-user-with-clientMutationId:
+                summary: Delete user with clientMutationId
+                value:
+                  {
+                    "query": "mutation {\n  removeExternalUser(input: {\n      userId: $userId, \n      clientMutationId: $clientMutationId\n  }) {\n      clientMutationId # REQUIRED - must specify as return field\n  }\n}",
+                    "variables":
+                      {
+                        "userId": "53824943-XXXX-XXXX-XXXX-088aee14038e",
+                        "clientMutationId": "someClientMutationId",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Deletes the end user
+          content:
+            application/json:
+              examples:
+                delete-user:
+                  summary: Delete user
+                  value:
+                    $ref: examples/users/deleteUser.json
+                delete-user-with-clientMutationId:
+                  summary: Delete user with clientMutationId
+                  value:
+                    $ref: examples/users/deleteUserWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+
+  #Authentications endpoints start here
+
+  "/      ":
+    post:
+      tags:
+        - authenticationQueries
+      summary: Get user authentications (user/master token)
+      description:
+        $ref: descriptions/endpoints/authentications/getAuthentications.md
+      operationId: get-authentications
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/authentications/getUserAuthentications.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              get-user-authentications:
+                summary: Get user authentications
+                value:
+                  {
+                    "query": "query {\n  viewer {\n    authentications {\n      edges {\n        node {\n          id\n          name\n          customFields\n          service {\n            id,\n            name,\n            icon,\n            title,\n            version\n          }\n        }\n      }\n      pageInfo{\n        hasNextPage\n        hasPreviousPage\n      }\n    }\n  }\n}",
+                    "variables": {},
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - If user token is passed, an array of all end user auths is returned. In case of master token, an array of auths from the embedded organization workspace is returned.
+          content:
+            application/json:
+              examples:
+                get-user-authentications:
+                  summary: Get user authentications
+                  value:
+                    $ref: examples/authentications/getAuthentications.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/       ":
+    post:
+      tags:
+        - authenticationMutations
+      summary: Create user Auth (user/master token)
+      description:
+        $ref: descriptions/endpoints/authentications/createAuthentication.md
+      operationId: create-authentication
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/authentications/createUserAuthentication.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              create-user-authentication:
+                summary: Create user auth
+                value:
+                  {
+                    "query": "mutation (\n    $authenticationName: String!,\n    $serviceId: String!,\n    $serviceEnvironmentId: String!,\n    $authenticationData: Json!,\n    $hidden: Boolean!\n    ){ createUserAuthentication (input:{\n            name: $authenticationName,\n            serviceId: $serviceId,\n            serviceEnvironmentId: $serviceEnvironmentId,\n            data: $authenticationData,\n            scopes: [],\n            hidden: $hidden\n      }) {\n    authenticationId\n  }\n}",
+                    "variables":
+                      {
+                        "authenticationName": "my-test-sqs-authentication-1",
+                        "serviceId": "e73d8e91-XXXX-XXXX-XXXX-37df289242",
+                        "serviceEnvironmentId": "a84eu2880-XXXX-XXXX-XXXX-7edd82904d",
+                        "authenticationData": '{"region":"us-east-1","account_id":"1234","access_key":"accesskey","secret_key":"secretkey"}',
+                        "hidden": true,
+                      },
+                  }
+              create-user-authentication-with-clientMutationId:
+                summary: Create user auth with clientMutationId
+                value:
+                  {
+                    "query": "mutation (\r\n    $authenticationName: String!,\r\n    $serviceId: String!,\r\n    $serviceEnvironmentId: String!,\r\n    $authenticationData: Json!,\r\n    $hidden: Boolean!,\r\n    $clientMutationId: String!\r\n    ){ createUserAuthentication (input:{\r\n            name: $authenticationName,\r\n            serviceId: $serviceId,\r\n            serviceEnvironmentId: $serviceEnvironmentId,\r\n            data: $authenticationData,\r\n            scopes: [],\r\n            hidden: $hidden,\r\n            clientMutationId: $clientMutationId\r\n      }) {\r\n    authenticationId\r\n    clientMutationId\r\n  }\r\n}",
+                    "variables":
+                      {
+                        "authenticationName": "my-test-sqs-authentication-1",
+                        "serviceId": "e73d8e91-XXXX-XXXX-XXXX-37df289242",
+                        "serviceEnvironmentId": "a84eu2880-XXXX-XXXX-XXXX-7edd82904d",
+                        "authenticationData": '{"region":"us-east-1","account_id":"1234","access_key":"accesskey","secret_key":"secretkey"}',
+                        "hidden": true,
+                        "clientMutationId": "some-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Returns the authentication ID of new auth
+          content:
+            application/json:
+              examples:
+                create-user-authentication:
+                  summary: Create user auth
+                  value:
+                    $ref: examples/authentications/createAuthentication.json
+                create-user-authentication-with-clientMutationId:
+                  summary: Create user auth with clientMutationId
+                  value:
+                    $ref: examples/authentications/createAuthenticationWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/        ":
+    post:
+      tags:
+        - authenticationMutations
+      summary: Delete user Auth (user/master token)
+      description:
+        $ref: descriptions/endpoints/authentications/deleteAuthentication.md
+      operationId: delete-authentication
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/authentications/deleteUserAuthentication.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              delete-authentication:
+                summary: Delete authentication
+                value:
+                  {
+                    "query": "mutation ($authenticationId: ID!){\n  removeAuthentication(input: { authenticationId: $authenticationId }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "authenticationId": "dd36c246-XXXX-XXXX-XXXX-a600be2b39fe",
+                      },
+                  }
+              delete-authentication-with-clientMutationId:
+                summary: Delete authentication with clientMutationId
+                value:
+                  {
+                    "query": "mutation ($authenticationId: ID!, $clientMutationId: String!){\n  removeAuthentication(input: { authenticationId: $authenticationId, clientMutationId: $clientMutationId }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "authenticationId": "dd36c246-XXXX-XXXX-XXXX-a600be2b39fe",
+                        "clientMutationId": "some-mutaion-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - User authentication is deleted
+          content:
+            application/json:
+              examples:
+                delete-authentication:
+                  summary: Delete authentication
+                  value:
+                    $ref: examples/authentications/deleteAuthentication.json
+                delete-authentication-with-clientMutationId:
+                  summary: Delete authentication with clientMutationId
+                  value:
+                    $ref: examples/authentications/deleteAuthenticationWithCMID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+
+  #Solutions endpoints start here
+
+  "/         ":
+    post:
+      tags:
+        - solutionQueries
+      summary: Get solutions (master token)
+      description:
+        $ref: descriptions/endpoints/solutions/getSolutions.md
+      operationId: get-solutions
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutions/getSolutions.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              get-all-solutions:
+                summary: Get all solutions
+                value:
+                  {
+                    "query": "query {\n  viewer {\n    solutions {\n      edges {\n        node {\n          id\n          title\n          description\n          tags\n          customFields {\n            key\n            value\n          }\n          configSlots {\n            externalId\n            title\n            defaultValue\n          }\n          \n        }\n        cursor\n      }\n      pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n      }\n    }\n  }\n}",
+                    "variables": {},
+                  }
+              get-solutions-by-tags:
+                summary: Get solutions by tags
+                value:
+                  {
+                    "query": "query {\n  viewer {\n    solutions (criteria: { tags: $tags }) {\n      edges {\n        node {\n          id\n          title\n          description\n          tags\n          customFields {\n            key\n            value\n          }\n          configSlots {\n            externalId\n            title\n            defaultValue\n          }\n          \n        }\n        cursor\n      }\n      pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n      }\n    }\n  }\n}",
+                    "variables": { "tags": ["marketing", "marketo"] },
+                  }
+              get-first-5-solutions:
+                summary: Get first 5 solutions
+                value:
+                  {
+                    "query": "query {\n  viewer {\n    solutions(first: 5) {\n      edges {\n        node {\n          id\n          title\n          description\n          tags\n          customFields {\n            key\n            value\n          }\n          configSlots {\n            externalId\n            title\n            defaultValue\n          }\n          \n        }\n        cursor\n      }\n      pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n      }\n    }\n  }\n}",
+                    "variables": {},
+                  }
+              get-first-solution-after-cursor:
+                summary: Get first solution after cursor
+                value:
+                  {
+                    "query": "query {\n  viewer {\n    solutions(first: 1, after: \"MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0\") {\n      edges {\n        node {\n          id\n          title\n          description\n          tags\n          customFields {\n            key\n            value\n          }\n          configSlots {\n            externalId\n            title\n            defaultValue\n          }\n          \n        }\n        cursor\n      }\n      pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n      }\n    }\n  }\n}",
+                    "variables": {},
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - An array of solutions from your embedded org is returned
+          content:
+            application/json:
+              examples:
+                get-all-solutions:
+                  summary: Get all solutions
+                  value:
+                    $ref: examples/solutions/getSolutionsAll.json
+                get-solutions-by-tags:
+                  summary: Get solutions by tags
+                  value:
+                    $ref: examples/solutions/getSolutionsByTags.json
+                get-first-5-solutions:
+                  summary: Get first 5 solutions
+                  value:
+                    $ref: examples/solutions/getSolutionsFirstFive.json
+                get-first-solution-after-cursor:
+                  summary: Get first solution after cursor
+                  value:
+                    $ref: examples/solutions/getSolutionsFirstAfterCursor.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+
+  #Solution instances endpoints start here
+
+  "/          ":
+    post:
+      tags:
+        - solutionInstanceQueries
+      summary: Get solution instances (user/master token)
+      description:
+        $ref: descriptions/endpoints/solutionInstances/getSolutionInstances.md
+      operationId: get-solution-instances
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutionInstances/getSolutionInstances.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            You can either pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here or <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> of an end user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              get-solution-instances-by-owner:
+                summary: Get solution instance(s) by owner
+                value:
+                  {
+                    "query": "query ($ownerId: String!){\n\tviewer {\n\t\tsolutionInstances(criteria: { owner: $ownerId }) {\n\t\t\tedges {\n\t\t\t\tnode {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t\tenabled\n\t\t\t\t\towner\n\t\t\t\t\tcreated\n\t\t\t\t\tsolutionVersionFlags {\n\t\t\t\t\t\thasNewerVersion\n\t\t\t\t\t\trequiresUserInputToUpdateVersion\n\t\t\t\t\t\trequiresSystemInputToUpdateVersion\n\t\t\t\t\t}\n\t\t\t\t\tworkflows {\n\t\t\t\t\t\tedges {\n\t\t\t\t\t\t\tnode {\n\t\t\t\t\t\t\t\ttriggerUrl\n\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\tsourceWorkflowId\n                                sourceWorkflowName\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tauthValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tauthId\n\t\t\t\t\t}\n\t\t\t\t\tconfigValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcursor\n\t\t\t}\n\t\t\tpageInfo {\n\t\t\t\tstartCursor\n\t\t\t\tendCursor\n\t\t\t\thasNextPage\n\t\t\t\thasPreviousPage\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "variables":
+                      { "ownerId": "13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4" },
+                  }
+              get-solution-instances-by-owner-and-solutionId:
+                summary: Get solution instance(s) by owner and solution ID
+                value:
+                  {
+                    "query": "query ($ownerId: String!){\n\tviewer {\n\t\tsolutionInstances (criteria: { solutionId: $solutionId, owner: $ownerId }) {\n\t\t\tedges {\n\t\t\t\tnode {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t\tenabled\n\t\t\t\t\towner\n\t\t\t\t\tcreated\n                    solution {\n                        id\n                        title\n                        description # more fields for solution can be returned\n                    }\n\t\t\t\t\tsolutionVersionFlags {\n\t\t\t\t\t\thasNewerVersion\n\t\t\t\t\t\trequiresUserInputToUpdateVersion\n\t\t\t\t\t\trequiresSystemInputToUpdateVersion\n\t\t\t\t\t}\n\t\t\t\t\tworkflows {\n\t\t\t\t\t\tedges {\n\t\t\t\t\t\t\tnode {\n\t\t\t\t\t\t\t\ttriggerUrl\n\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\tsourceWorkflowId\n                                sourceWorkflowName\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tauthValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tauthId\n\t\t\t\t\t}\n\t\t\t\t\tconfigValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcursor\n\t\t\t}\n\t\t\tpageInfo {\n\t\t\t\tstartCursor\n\t\t\t\tendCursor\n\t\t\t\thasNextPage\n\t\t\t\thasPreviousPage\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "variables":
+                      {
+                        "ownerId": "13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4",
+                        "solutionId": "b73d4e07xxx-xxx-xxx-xxx-xxxafad23d94",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - If master token is used, an array of solution instances for all end users is returned. In case of user token, only instances owned by the user are returned.
+          content:
+            application/json:
+              examples:
+                get-solution-instances-by-owner:
+                  summary: Get solution instance(s) by owner
+                  value:
+                    $ref: examples/solutionInstances/getSolutionInstancesByOwner.json
+                get-solution-instances-by-owner-and-solutionId:
+                  summary: Get solution instance(s) by owner and solution ID
+                  value:
+                    $ref: examples/solutionInstances/getSolutionInstancesByOwnerAndSolutionID.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/           ":
+    post:
+      tags:
+        - solutionInstanceMutations
+      summary: Create solution instance (user token)
+      description:
+        $ref: descriptions/endpoints/solutionInstances/createSolutionInstance.md
+      operationId: create-solution-instance
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutionInstances/createSolutionInstance.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              create-solution-instance--return-workflow-url:
+                summary: Create Solution Instance - return workflow URL
+                value:
+                  {
+                    "query": "mutation ($solutionId: ID!, $instanceName: String!){\n   createSolutionInstance(input: {\n       solutionId: $solutionId\n       instanceName: $instanceName\n   }) {\n     solutionInstance {\n       id\n       name\n       enabled\n       created\n       workflows {\n           edges {\n               node {\n                   id\n                   triggerUrl\n                   sourceWorkflowId\n               }\n           }\n       }\n     }\n   }\n }",
+                    "variables":
+                      {
+                        "solutionId": "b3422397-XXXX-XXXX-XXXX-57e7e66771b3",
+                        "instanceName": "Gene Slack star instance 2",
+                      },
+                  }
+              create-solution-instance--return-authId:
+                summary: Create Solution Instance - return authId
+                value:
+                  {
+                    "query": "mutation ($solutionId: ID!, $instanceName: String!){\n   createSolutionInstance(input: {\n       solutionId: $solutionId\n       instanceName: $instanceName\n   }) {\n     solutionInstance {\n       id\n       name\n       enabled\n       created\n       authValues{\n           authId\n           externalId\n       }\n     }\n   }\n }",
+                    "variables":
+                      {
+                        "solutionId": "b3422397-XXXX-XXXX-XXXX-57e7e66771b3",
+                        "instanceName": "Gene Salesforce to Slack instance",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - InstanceId of the newly created instance is returned
+          content:
+            application/json:
+              examples:
+                create-solution-instance--return-workflow-url:
+                  summary: Create Solution Instance - return workflow URL
+                  value:
+                    $ref: examples/solutionInstances/createSolutionInstancesReturnWorkflowURL.json
+                create-solution-instance--return-authId:
+                  summary: Create Solution Instance - return authId
+                  value:
+                    $ref: examples/solutionInstances/createSolutionInstancesReturnAuthId.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/            ":
+    post:
+      tags:
+        - solutionInstanceMutations
+      summary: Update solution instance (user token)
+      description:
+        $ref: descriptions/endpoints/solutionInstances/updateSolutionInstance.md
+      operationId: update-solution-instance
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutionInstances/updateSolutionInstance.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              enable-solution-instance:
+                summary: Enable Solution Instance
+                value:
+                  {
+                    "query": "mutation ($solutionInstanceId: ID!, $instanceName: String!, $enabled: Boolean!) {\n  updateSolutionInstance(input: {\n      solutionInstanceId: $solutionInstanceId,\n      instanceName: $instanceName, \n      enabled: $enabled\n  }) {\n    solutionInstance {\n      id\n      name\n      enabled\n      created\n    }\n  }\n}",
+                    "variables":
+                      {
+                        "solutionInstanceId": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266",
+                        "instanceName": "myCustomersSolutionInstanceName",
+                        "enabled": true,
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Updates the solution instance
+          content:
+            application/json:
+              examples:
+                update-solution-instance-enable:
+                  summary: Update Solution Instance - Enable
+                  value:
+                    $ref: examples/solutionInstances/updateSolutionInstanceEnable.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/             ":
+    post:
+      tags:
+        - solutionInstanceMutations
+      summary: Upgrade solution instance (user token)
+      description:
+        $ref: descriptions/endpoints/solutionInstances/upgradeSolutionInstance.md
+      operationId: upgrade-solution-instance
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutionInstances/upgradeSolutionInstance.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              upgrade-solution-instance:
+                summary: Upgrade Solution Instance
+                value:
+                  {
+                    "query": "mutation ($solutionInstanceId: ID!, $configValues: [ConfigValue!], $authValues: [AuthValue!] ){\n  upgradeSolutionInstance (input: {\n    solutionInstanceId: $solutionInstanceId, \n    configValues: $configValues,\n    authValues: $authValues\n  }) \n    { \n solutionInstance  {\n  id\n  configValues{\n    externalId\n    value\n  }\n  authValues{\n    authId\n    externalId\n  }\n  enabled\n  created\n  }\n }\n}",
+                    "variables":
+                      {
+                        "solutionInstanceId": "625xxx-xxx-xxx-xxx-xxx111f",
+                        "configValues":
+                          [
+                            {
+                              "externalId": "external_support-email",
+                              "value": "support@example.com",
+                            },
+                          ],
+                        "authValues":
+                          [
+                            {
+                              "externalId": "external_slack_authentication",
+                              "authId": "aaa67786-XXXX-XXXX-XXXX-97dedd1519b3",
+                            },
+                          ],
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Upgrades the solution instance with new auths or configs
+          content:
+            application/json:
+              examples:
+                upgrade-solution-instance:
+                  summary: Upgrade Solution Instance
+                  value:
+                    $ref: examples/solutionInstances/upgradeSolutionInstance.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/              ":
+    post:
+      tags:
+        - solutionInstanceMutations
+      summary: Delete Solution Instance (user token)
+      description:
+        $ref: descriptions/endpoints/solutionInstances/deleteSolutionInstance.md
+      operationId: delete-solution-instance
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/solutionInstances/deleteSolutionInstance.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="#tag/userMutations/operation/create-user-token">user
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              delete-solution-instance:
+                summary: Delete Solution Instance
+                value:
+                  {
+                    "query": "mutation ($solutionInstanceId: ID!){\n  removeSolutionInstance(input: {solutionInstanceId: $solutionInstanceId}) {\n   clientMutationId\n }\n}",
+                    "variables":
+                      {
+                        "solutionInstanceId": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266",
+                      },
+                  }
+              delete-solution-instance-with-clientMutationId:
+                summary: Delete Solution Instance with clientMutationId
+                value:
+                  {
+                    "query": "mutation ($solutionInstanceId: ID!){\n  removeSolutionInstance(input: {solutionInstanceId: $solutionInstanceId, clientMutationId: $clientMutationId}) {\n   clientMutationId\n }\n}",
+                    "variables":
+                      {
+                        "solutionInstanceId": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266",
+                        "clientMutationId": "some-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Solution instance is deleted
+          content:
+            application/json:
+              examples:
+                delete-solution-instance:
+                  summary: Delete Solution Instance
+                  value:
+                    $ref: examples/solutionInstances/deleteSolutionInstance.json
+                delete-solution-instance-with-clientMutationId:
+                  summary: Delete Solution Instance with clientMutationId
+                  value:
+                    $ref: examples/solutionInstances/deleteSolutionInstanceWithClientMutationId.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/               ":
+    post:
+      tags:
+        - projectMutations
+      summary: Import Project (master token)
+      description:
+        $ref: descriptions/endpoints/projects/importProject.md
+      operationId: import-project
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/projects/importProject.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              import-project:
+                summary: Import Project
+                value:
+                  {
+                    "query": "mutation ($exportedProjectJson: String!, $targetProjectId: ID!) {\n  importProject (input: {\n    exportedProjectJson: $exportedProjectJson,\n    targetProjectId: $targetProjectId\n  }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "exportedProjectJson": "{}",
+                        "targetProjectId": "944dxxx-xxx-xxx-xxx-xxx222eb99",
+                      },
+                  }
+              import-project-with-clientMutationId:
+                summary: Import Project with clientMutationId
+                value:
+                  {
+                    "query": "mutation ($exportedProjectJson: String!, $targetProjectId: ID!, $clientMutationId: String) {\n  importProject (input: {\n    exportedProjectJson: $exportedProjectJson\n    targetProjectId: $targetProjectId,\n    clientMutationId: $clientMutationId\n  }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "exportedProjectJson": "{}",
+                        "targetProjectId": "944dxxx-xxx-xxx-xxx-xxx222eb99",
+                        "clientMutationId": "some-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - The project is imported to the embedded org
+          content:
+            application/json:
+              examples:
+                import-project:
+                  summary: Import Project
+                  value:
+                    $ref: examples/projects/importProject.json
+                import-project-with-clientMutationId:
+                  summary: Import Project with clientMutationId
+                  value:
+                    $ref: examples/projects/importProjectWithClientMutationId.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/                ":
+    post:
+      tags:
+        - projectMutations
+      summary: Export Project (master token)
+      description:
+        $ref: descriptions/endpoints/projects/exportProject.md
+      operationId: export-project
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/projects/exportProject.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              export-project:
+                summary: Export Project
+                value:
+                  {
+                    "query": "mutation ($projectId: ID!) {\n  exportProject (input: {\n    projectId: $projectId,\n    exportSolution: true\n  }) {\n    exportedProjectJson\n  }\n}",
+                    "variables":
+                      { "projectId": "944dxxx-xxx-xxx-xxx-xxx222eb99" },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - The JSON string of the exported project is returned
+          content:
+            application/json:
+              examples:
+                export-project:
+                  summary: Export Project
+                  value:
+                    $ref: examples/projects/exportProject.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/                 ":
+    post:
+      tags:
+        - workflowMutations
+      summary: Import Workflows (master token)
+      description:
+        $ref: descriptions/endpoints/workflows/importWorkflows.md
+      operationId: import-workflows
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/workflows/importWorkflows.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              import-workflows:
+                summary: Import Workflows
+                value:
+                  {
+                    "query": "mutation ($exportedProjectJson: String!, $targetProjectId: ID!) {\n  importProject (input: {\n    exportedProjectJson: $exportedProjectJson,\n    targetProjectId: $targetProjectId\n  }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "exportedProjectJson": "{}",
+                        "targetProjectId": "944dxxx-xxx-xxx-xxx-xxx222eb99",
+                      },
+                  }
+              import-workflows-with-clientMutationId:
+                summary: Import Workflowswith clientMutationId
+                value:
+                  {
+                    "query": "mutation ($exportedProjectJson: String!, $targetProjectId: ID!, $clientMutationId: String) {\n  importProject (input: {\n    exportedProjectJson: $exportedProjectJson\n    targetProjectId: $targetProjectId,\n    clientMutationId: $clientMutationId\n  }) {\n    clientMutationId\n  }\n}",
+                    "variables":
+                      {
+                        "exportedProjectJson": "{}",
+                        "targetProjectId": "944dxxx-xxx-xxx-xxx-xxx222eb99",
+                        "clientMutationId": "some-mutation-id",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Workflows are imported to the embedded org
+          content:
+            application/json:
+              examples:
+                import-workflows:
+                  summary: Import Workflows
+                  value:
+                    $ref: examples/workflows/importWorkflows.json
+                import-workflows-with-clientMutationId:
+                  summary: Import Workflows with clientMutationId
+                  value:
+                    $ref: examples/workflows/importWorkflowsWithClientMutationId.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/                  ":
+    post:
+      tags:
+        - workflowMutations
+      summary: Export Workflows (master token)
+      description:
+        $ref: descriptions/endpoints/workflows/exportWorkflows.md
+      operationId: export-workflows
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/workflows/exportWorkflows.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              export-workflows:
+                summary: Export Workflows
+                value:
+                  {
+                    "query": "mutation ($projectId: ID!) {\n  exportProject (input: {\n    projectId: $projectId,\n    exportSolution: true\n  }) {\n    exportedProjectJson\n  }\n}",
+                    "variables":
+                      { "projectId": "944dxxx-xxx-xxx-xxx-xxx222eb99" },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - JSON string of the exported workflows is returned
+          content:
+            application/json:
+              examples:
+                export-workflows:
+                  summary: Export Workflows
+                  value:
+                    $ref: examples/workflows/exportWorkflows.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+  "/                   ":
+    post:
+      tags:
+        - callConnectorMutations
+      summary: Call a Tray connector
+      description:
+        $ref: descriptions/endpoints/callConnector.md
+      operationId: call-connector
+      x-codeSamples:
+        - lang: "cURL"
+          label: "curl"
+          source:
+            $ref: code_samples/callConnector.curl
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer 3fd74d349xxxxxxxxxxxxxxxxxxxxxxxxd90df521
+          description: >-
+            Pass your <a target="_blank"
+            href="https://tray.io/documentation/embedded/getting-started/embedded-id-and-master-token/">master
+            token</a> here
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                variables:
+                  type: object
+            examples:
+              list-all-leads-in-Salesforce:
+                summary: List all leads in Salesforce
+                value:
+                  {
+                    "query": "mutation listLeads(\n  $connector: String!, \n  $version: String!, \n  $operation: String!, \n  $authId: String, \n){ listAllLeads: callConnector(input: {\n    connector: $connector,\n    version: $version,\n    operation: $operation,\n    authId: $authId,\n    input: \"{\\\"limit\\\":10,\\\"conditions_type\\\":\\\"Match all conditions\\\",\\\"fields\\\":[\\\"Id\\\",\\\"Name\\\"],\\\"object\\\":\\\"Lead\\\"}\"\n  }) {\n    output\n  }\n}",
+                    "variables":
+                      {
+                        "connector": "salesforce",
+                        "version": "8.7",
+                        "operation": "find_records",
+                        "authId": "062af7e2-b5xxx-xxx-xxx-xxx-xxxxx46d912",
+                      },
+                  }
+              find-warm-leads-in-Salesforce:
+                summary: List warm leads in Salesforce
+                value:
+                  {
+                    "query": "mutation listLeads(\n  $connector: String!, \n  $version: String!, \n  $operation: String!, \n  $authId: String, \n){ \n  listWarmLeads: callConnector(input: {\n    connector: $connector,\n    version: $version,\n    operation: $operation,\n    authId: $authId,\n    input: \"{\\\"conditions_type\\\":\\\"Match all conditions\\\",\\\"fields\\\":[\\\"Id\\\",\\\"Name\\\"],\\\"conditions\\\":[{\\\"field\\\":\\\"Rating\\\",\\\"operator\\\":\\\"Equal to\\\",\\\"value\\\":\\\"Warm\\\"}],\\\"object\\\":\\\"Lead\\\"}\"\n  }) {\n    output\n  }\n}",
+                    "variables":
+                      {
+                        "connector": "salesforce",
+                        "version": "8.7",
+                        "operation": "find_records",
+                        "authId": "062af7e2-b5xxx-xxx-xxx-xxx-xxxxx46d912",
+                      },
+                  }
+        required: true
+      responses:
+        "200":
+          description: OK - Response of the connector operation is returned
+          content:
+            application/json:
+              examples:
+                list-all-leads-in-Salesforce:
+                  summary: List all leads from Salesforce
+                  value:
+                    $ref: examples/listAllLeads.json
+                list-warm-leads-in-Salesforce:
+                  summary: List warm leads from Salesforce
+                  value:
+                    $ref: examples/listWarmLeads.json
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                $ref: examples/401.json
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+        "500":
+          description: Internal Error
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []

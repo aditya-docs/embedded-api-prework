@@ -1,0 +1,30 @@
+{
+  "data": {
+    "users": {
+      "edges": [
+        {
+          "node": {
+            "name": "Michael Scott",
+            "id": "13b3ab9c-XXXX-XXXX-XXXX-djfisjaf923",
+            "externalUserId": "668341a0-XXXX-XXXX-XXXX-d3f55c9ba02b"
+          },
+          "cursor": "MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0"
+        },
+        {
+          "node": {
+            "name": "Dwight Schrute",
+            "id": "1a71daf1-XXXX-XXXX-XXXX-dbb4ab325a55",
+            "externalUserId": "32433878-XXXX-XXXX-XXXX-321khkdf32"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1",
+        "hasPreviousPage": false,
+        "startCursor": "MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0"
+      }
+    }
+  }
+}

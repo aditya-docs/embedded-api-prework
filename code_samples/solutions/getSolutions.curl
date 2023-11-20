@@ -1,0 +1,8 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "query {\n  viewer {\n    solutions {\n      edges {\n        node {\n          id\n          title\n          description\n          tags\n          customFields {\n            key\n            value\n          }\n          configSlots {\n            externalId\n            title\n            defaultValue\n          }\n          authSlots {\n            title\n            externalId\n          }\n        }\n        cursor\n      }\n      pageInfo {\n          hasNextPage\n          endCursor\n          hasPreviousPage\n          startCursor\n      }\n    }\n  }\n}",
+    "variables": {}
+  }'

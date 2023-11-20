@@ -1,0 +1,11 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation  ($userId: ID!, $isTestUser: Boolean ){\n   updateExternalUser(input: {\n      userId: $userId,\n      isTestUser: $isTestUser\n  }) {\n    user{\n\t\t\tname\n\t\t\tid\n\t\t\texternalUserId\n\t\t\tisTestUser\n\t\t}\n  }\n}",
+    "variables": {
+      "userId": "53824943-XXXX-XXXX-XXXX-088aee14038e",
+      "isTestUser": true
+    }
+  }'

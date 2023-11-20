@@ -1,0 +1,12 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($solutionInstanceId: ID!, $instanceName: String!, $enabled: Boolean!) {\n  updateSolutionInstance(input: {\n      solutionInstanceId: $solutionInstanceId,\n      instanceName: $instanceName, \n      enabled: $enabled\n  }) {\n    solutionInstance {\n      id\n      name\n      enabled\n      created\n    }\n  }\n}",
+    "variables": {
+      "solutionInstanceId": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266",
+      "instanceName": "myCustomersSolutionInstanceName",
+      "enabled": true
+    }
+  }'

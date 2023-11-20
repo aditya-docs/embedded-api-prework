@@ -1,0 +1,48 @@
+{
+  "data": {
+    "viewer": {
+      "solutions": {
+        "edges": [
+          {
+            "node": {
+              "id": "28233cac-XXXX-XXXX-XXXX-e464a6881c04",
+              "title": "New Marketo Leads MailChimp Campaign",
+              "description": "Add newly created Marketo leads to the New Leads MailChimp Campaign",
+              "tags": ["marketing"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [
+                {
+                  "externalId": "external_campaignId",
+                  "title": "campaign ID",
+                  "defaultValue": "1234"
+                }
+              ],
+              "authSlots": [
+                {
+                  "externalId": "external_marketo_authentication",
+                  "title": "Marketo authentication"
+                },
+                {
+                  "externalId": "external_mailchimp_authentication",
+                  "title": "mailchimp authentication"
+                }
+              ]
+            },
+            "cursor": "MjgyMzNjYWMtNzc1ZS00MTNlLWIyYWYtZTQ2NGE2ODgxYzA0"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "MjgyMzNjYWMtNzc1ZS00MTNlLWIyYWYtZTQ2NGE2ODgxYzA0",
+          "hasPreviousPage": false,
+          "startCursor": "MjgyMzNjYWMtNzc1ZS00MTNlLWIyYWYtZTQ2NGE2ODgxYzA0"
+        }
+      }
+    }
+  }
+}

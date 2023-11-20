@@ -1,0 +1,22 @@
+{
+  "data": {
+    "users": {
+      "edges": [
+        {
+          "node": {
+            "name": "Dwight Schrute",
+            "id": "1a71daf1-XXXX-XXXX-XXXX-dbb4ab325a55",
+            "externalUserId": "dantonb"
+          },
+          "cursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1",
+        "hasPreviousPage": false,
+        "startCursor": "MWE3MWRhZjEtOTdiYS00MDM2LWE1Y2MtZGJiNGFiMzI1YTU1"
+      }
+    }
+  }
+}

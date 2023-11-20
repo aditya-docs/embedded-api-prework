@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&family=Poppins:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div id="redoc-container"></div>
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+    <script>
+      Redoc.init(
+        "openapi.yaml",
+        {
+          pagination: "section",
+          pathInMiddlePanel: true,
+          theme: {
+            breakpoints: {
+              small: "50rem",
+              medium: "75rem",
+            },
+            codeBlock: {
+              backgroundColor: "#03073D",
+            },
+            colors: {
+              accent: {
+                main: "#4A54F5",
+              },
+              border: {
+                dark: "rgba(0, 0, 0, 0.2)",
+              },
+              primary: {
+                main: "#4A54F5",
+                light: "rgba(246, 20, 63, 0.42)",
+              },
+              text: {
+                primary: "rgba(0, 0, 0, 1)",
+                secondary: "#4d4d4d",
+              },
+              http: {
+                get: "#49A1B5",
+                post: "#16A76F",
+                put: "#F09B03",
+                delete: "#D33F3F",
+              },
+              responses: {
+                error: {
+                  backgroundColor: "#F9E5E5",
+                  borderColor: "#F4F5F7",
+                  color: "#8C2020",
+                  tabTextColor: "#D33F3F",
+                },
+                success: {
+                  backgroundColor: "#D0F9E9",
+                  borderColor: "#F4F5F7",
+                  color: "#0B593B",
+                  tabTextColor: "#40E9A7;",
+                },
+              },
+            },
+            typography: {
+              fontSize: "16px",
+              fontFamily: "Nunito Sans, sans-serif",
+              optimizeSpeed: true,
+              smoothing: "antialiased",
+              headings: {
+                fontWeight: "bold",
+                lineHeight: "24px",
+              },
+              code: {
+                fontWeight: "600",
+                color: "rgba(92, 62, 189, 1)",
+                wrap: true,
+              },
+              links: {
+                color: "#4A54F5",
+                visited: "#4A54F5",
+                hover: "#fa768f",
+              },
+            },
+            sidebar: {
+              width: "250px",
+              textColor: "#000000",
+            },
+            rightPanel: {
+              backgroundColor: "#ffffff",
+              textColor: "#ffffff",
+            },
+            logo: {
+              gutter: "10px",
+            },
+          },
+        },
+        document.getElementById("redoc-container"),
+        (onLoaded = (error) => {
+          if (!error) {
+            let acc = document.getElementsByClassName("accordion-button");
+            for (let i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function () {
+                this.classList.toggle("active-accordion-item");
+                let panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+              });
+            }
+            let blocks = document.querySelectorAll(".sc-iJCRrE>pre");
+            blocks.forEach((block) => {
+              block.classList.add("line-numbers");
+              if (navigator.clipboard) {
+                let button = document.createElement("button");
+
+                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
+                block.appendChild(button);
+
+                button.addEventListener("click", async () => {
+                  await copyCode(block, button);
+                });
+              }
+            });
+          }
+
+          async function copyCode(block, button) {
+            let code = block.querySelector("code");
+            let text = code.innerText;
+
+            await navigator.clipboard.writeText(text);
+            button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#00FF00"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+
+            setTimeout(() => {
+              button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>`;
+            }, 700);
+          }
+          // document.querySelectorAll("div[id^='tag/']").forEach(async (element) => {
+          //     element.style.padding = "20px";
+          // })
+          document
+            .querySelectorAll("h3+div>button")
+            .forEach(async (element) => {
+              await element.click();
+              document
+                .querySelectorAll(
+                  "h3+div>button+div button[aria-label='expand properties']"
+                )
+                .forEach(async (responseElement) => {
+                  await responseElement.click();
+                });
+            });
+        })
+      );
+    </script>
+  </body>
+</html>

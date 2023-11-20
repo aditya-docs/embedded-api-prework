@@ -1,0 +1,10 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_OR_MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "query ($ownerId: String!){\n\tviewer {\n\t\tsolutionInstances(criteria: { owner: $ownerId }) {\n\t\t\tedges {\n\t\t\t\tnode {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t\tenabled\n\t\t\t\t\towner\n\t\t\t\t\tcreated\n\t\t\t\t\tsolutionVersionFlags {\n\t\t\t\t\t\thasNewerVersion\n\t\t\t\t\t\trequiresUserInputToUpdateVersion\n\t\t\t\t\t\trequiresSystemInputToUpdateVersion\n\t\t\t\t\t}\n\t\t\t\t\tworkflows {\n\t\t\t\t\t\tedges {\n\t\t\t\t\t\t\tnode {\n\t\t\t\t\t\t\t\ttriggerUrl\n\t\t\t\t\t\t\t\tid\n\t\t\t\t\t\t\t\tsourceWorkflowId\n                                sourceWorkflowName\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tauthValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tauthId\n\t\t\t\t\t}\n\t\t\t\t\tconfigValues {\n\t\t\t\t\t\texternalId\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcursor\n\t\t\t}\n\t\t\tpageInfo {\n\t\t\t\tstartCursor\n\t\t\t\tendCursor\n\t\t\t\thasNextPage\n\t\t\t\thasPreviousPage\n\t\t\t}\n\t\t}\n\t}\n}",
+    "variables": {
+      "ownerId": "13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4"
+    }
+  }'

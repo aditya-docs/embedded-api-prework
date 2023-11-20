@@ -1,0 +1,11 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($solutionId: ID!, $instanceName: String!){\n   createSolutionInstance(input: {\n       solutionId: $solutionId\n       instanceName: $instanceName\n   }) {\n     solutionInstance {\n       id\n       name\n       enabled\n       created\n       workflows {\n           edges {\n               node {\n                   id\n                   triggerUrl\n                   sourceWorkflowId\n               }\n           }\n       }\n     }\n   }\n }",
+    "variables": {
+      "solutionId": "b3422397-XXXX-XXXX-XXXX-57e7e66771b3",
+      "instanceName": "Gene Slack star instance 2"
+    }
+  }'

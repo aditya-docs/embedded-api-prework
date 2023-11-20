@@ -1,0 +1,49 @@
+{
+  "data": {
+    "viewer": {
+      "authentications": {
+        "edges": [
+          {
+            "node": {
+              "id": "569xxxxxx-xxxxx-xxxx-7e829d2c56d",
+              "name": "Roger Ramjet's Slack Account",
+              "service": {
+                "id": "227312c4-3e5f-4b0d-22a0-5b9630ece00e",
+                "name": "slack",
+                "icon": "https://s3.amazonaws.com/images.tray.io/artisan/icons/slack.png",
+                "title": "Slack",
+                "version": "1"
+              }
+            }
+          },
+          {
+            "node": {
+              "id": "0b07xxxxxx-xxxxx-xxxx-b8d4121471c3",
+              "name": "Roger Ramjet's Trello Account",
+              "service": {
+                "id": "72cef4e9-229f-4d7c-97e3-b6cd4d92146f",
+                "name": "trello",
+                "icon": "https://s3.amazonaws.com/images.tray.io/artisan/icons/trello.png",
+                "title": "Trello",
+                "version": "1"
+              }
+            }
+          },
+          {
+            "node": {
+              "id": "a29dxxxxxx-xxxxx-xxxx-99901f41c698",
+              "name": "Roger Ramjet's Slack Account 2",
+              "service": {
+                "id": "227312c4-3e5f-4b0d-22a0-5b9630ece00e",
+                "name": "slack",
+                "icon": "https://s3.amazonaws.com/images.tray.io/artisan/icons/slack.png",
+                "title": "Slack",
+                "version": "1"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "data": {
+    "removeSolutionInstance": {
+      "clientMutationId": "some-mutation-id"
+    }
+  }
+}

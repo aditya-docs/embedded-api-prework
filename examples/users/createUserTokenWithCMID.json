@@ -1,0 +1,8 @@
+{
+  "data": {
+    "authorize": {
+      "accessToken": "d89e47065e434543b73a9d69e591f2f8ca18e3ed8fde4c03a42cfb178d812aab",
+      "clientMutationId": "my-mutation-id"
+    }
+  }
+}

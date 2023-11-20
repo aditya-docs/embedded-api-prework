@@ -1,0 +1,14 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_OR_MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation (\n    $authenticationName: String!,\n    $serviceId: String!,\n    $serviceEnvironmentId: String!,\n    $authenticationData: Json!,\n    $hidden: Boolean!\n    ){ createUserAuthentication (input:{\n            name: $authenticationName,\n            serviceId: $serviceId,\n            serviceEnvironmentId: $serviceEnvironmentId,\n            data: $authenticationData,\n            scopes: [],\n            hidden: $hidden\n      }) {\n    authenticationId\n  }\n}",
+    "variables": {
+      "authenticationName": "my-test-sqs-authentication-1",
+      "serviceId": "e73d8e91-XXXX-XXXX-XXXX-37df289242",
+      "serviceEnvironmentId": "a84eu2880-XXXX-XXXX-XXXX-7edd82904d",
+      "authenticationData": "{\"region\":\"us-east-1\",\"account_id\":\"1234\",\"access_key\":\"accesskey\",\"secret_key\":\"secretkey\"}",
+      "hidden": true
+    }
+  }'

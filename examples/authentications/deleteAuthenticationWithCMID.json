@@ -1,0 +1,7 @@
+{
+  "data": {
+    "removeAuthentication": {
+      "clientMutationId": "some-mutaion-id"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "data": {
+    "viewer": {
+      "solutionInstances": {
+        "edges": [
+          {
+            "node": {
+              "id": "533d48e8-XXXX-XXXX-XXXX-74ff887198d3",
+              "name": "Sample Instance",
+              "enabled": true,
+              "owner": "13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4",
+              "created": "2019-12-03T21:11:09.456Z",
+              "solution": {
+                "id": "b73d4e07xxx-xxx-xxx-xxx-xxxafad23d94",
+                "title": "Slack webhook solution",
+                "description": "sends a message to a slack channel of your choice"
+              },
+              "solutionVersionFlags": {
+                "hasNewerVersion": true,
+                "requiresUserInputToUpdateVersion": true,
+                "requiresSystemInputToUpdateVersion": false
+              },
+              "workflows": {
+                "edges": [
+                  {
+                    "node": {
+                      "triggerUrl": null,
+                      "id": "89f8ebeb-XXXX-XXXX-XXXX-be070f3cd0f8",
+                      "sourceWorkflowId": "3af6461f-XXXX-XXXX-XXXX-91ada5769f90"
+                    }
+                  }
+                ]
+              },
+              "authValues": [
+                {
+                  "externalId": "external_slack_authentication",
+                  "authId": "dcbc11f1-XXXX-XXXX-XXXX-b7f90dafcf28"
+                }
+              ],
+              "configValues": []
+            },
+            "cursor": "NTMzZDQ4ZTgtNjM2Zi00M2FkLTk1ZjItNzRmZjg4NzE5OGQz"
+          }
+        ],
+        "pageInfo": {
+          "startCursor": "NTMzZDQ4ZTgtNjM2Zi00M2FkLTk1ZjItNzRmZjg4NzE5OGQz",
+          "endCursor": "NTMzZDQ4ZTgtNjM2Zi00M2FkLTk1ZjItNzRmZjg4NzE5OGQz",
+          "hasNextPage": false,
+          "hasPreviousPage": false
+        }
+      }
+    }
+  }
+}

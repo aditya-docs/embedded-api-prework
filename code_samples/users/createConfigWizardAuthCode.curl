@@ -1,0 +1,10 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($userId: ID!) {\n  generateAuthorizationCode( input: {\n    userId: $userId\n  }) {\n    authorizationCode\n  }\n}",
+    "variables": {
+      "userId": "d869ec65-XXXX-XXXX-XXXX-ac5c1a3958b6"
+    }
+  }'

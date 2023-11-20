@@ -1,0 +1,13 @@
+{
+  "data": {
+    "updateExternalUser": {
+      "user": {
+        "name": "Dwaight Schrute",
+        "id": "ad15b7ae-4c2d-4574-bf4f-5e8e1097a6e9",
+        "externalUserId": "test003",
+        "isTestUser": true,
+        "clientMutationId": "some-mutation-id"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+theme:
+  openapi:
+    pagination: none
+    hideTryItPanel: true
+    pathInMiddlePanel: true
+    hideDownloadButton: true
+    hideRequestPayloadSample: true
+    expandDefaultRequest: false
+    expandDefaultResponse: false
+    theme:
+      colors:
+        http:
+          post: '#238FB1'
+        primary:
+          main: '#0065FB'
+      sidebar:
+        backgroundColor: '#F4F5F7'
+        activeBgColor: '#D8DCE0'
+      typography:
+        fontFamily: '"Source Sans Pro", sans-serif'
+        fontSize: 16px
+    showConsole: true
+    generateCodeSamples:
+      languages:
+        - lang: JavaScript
+          label: JavaScript
+        - lang: Python
+          label: Python
+        - lang: Java
+          label: Java
+        - lang: 'C#'
+          label: 'C#'
+extends:
+  - recommended

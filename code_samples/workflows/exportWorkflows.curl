@@ -1,0 +1,10 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($workflowIds: [ID!]) {\n  exportWorkflows (input: {\n    workflowIds: $workflowIds\n  }) {\n    exportedWorkflowsJson\n  }\n}",
+    "variables": {
+      "workflowIds": ["ea3c20f5-xxxx-xxxx-xxxx-0ce2b7bb9f29","a6af4264-xxxx-xxxx-xxxx-70a1e59d72b2"]
+    }
+  }'

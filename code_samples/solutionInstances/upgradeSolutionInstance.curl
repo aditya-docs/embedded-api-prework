@@ -1,0 +1,22 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($solutionInstanceId: ID!, $configValues: [ConfigValue!], $authValues: [AuthValue!] ){\n  upgradeSolutionInstance (input: {\n    solutionInstanceId: $solutionInstanceId, \n    configValues: $configValues,\n    authValues: $authValues\n  }) \n    { \n solutionInstance  {\n  id\n  configValues{\n    externalId\n    value\n  }\n  authValues{\n    authId\n    externalId\n  }\n  enabled\n  created\n  }\n }\n}",
+    "variables": {
+      "solutionInstanceId": "625xxx-xxx-xxx-xxx-xxx111f",
+      "configValues": [
+        {
+          "externalId": "external_support-email",
+          "value": "support@example.com"
+        }
+      ],
+      "authValues": [
+        {
+          "externalId": "external_slack_authentication",
+          "authId": "aaa67786-XXXX-XXXX-XXXX-97dedd1519b3"
+        }
+      ]
+    }
+  }'

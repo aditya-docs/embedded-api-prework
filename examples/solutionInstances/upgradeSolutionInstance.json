@@ -1,0 +1,23 @@
+{
+  "data": {
+    "upgradeSolutionInstance": {
+      "solutionInstance": {
+        "id": "625xxx-xxx-xxx-xxx-xxx111f",
+        "enabled": true,
+        "created": "2019-02-25T11:02:21.884Z",
+        "configValues": [
+          {
+            "externalId": "external_support-email",
+            "value": "support@example.com"
+          }
+        ],
+        "authValues": [
+          {
+            "externalId": "external_slack_authentication",
+            "authId": "aaa67786-XXXX-XXXX-XXXX-97dedd1519b3"
+          }
+        ]
+      }
+    }
+  }
+}

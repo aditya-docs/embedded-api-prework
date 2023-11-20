@@ -1,0 +1,8 @@
+{
+  "data": {
+    "generateAuthorizationCode": {
+      "authorizationCode": "64f3f7c3095e7c4bf43c4e8b17feb63f968c9526",
+      "clientMutationId": "my-mutation-id"
+    }
+  }
+}

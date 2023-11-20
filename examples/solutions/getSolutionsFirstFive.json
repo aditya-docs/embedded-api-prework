@@ -1,0 +1,148 @@
+{
+  "data": {
+    "viewer": {
+      "solutions": {
+        "edges": [
+          {
+            "node": {
+              "id": "28233cac-XXXX-XXXX-XXXX-e464a6881c04",
+              "title": "New Marketo Leads > MailChimp New LeadCampaign",
+              "description": "New Marketo Leads to MailChimp New Leads Campaign",
+              "tags": ["marketing"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [
+                {
+                  "externalId": "external_campaignId",
+                  "title": "campaign ID",
+                  "defaultValue": "1234"
+                }
+              ],
+              "authSlots": [
+                {
+                  "externalId": "external_marketo_authentication",
+                  "title": "Marketo authentication"
+                },
+                {
+                  "externalId": "external_mailchimp_authentication",
+                  "title": "mailchimp authentication"
+                }
+              ]
+            },
+            "cursor": "MjgyMzNjYWMtNzc1ZS00MTNlLWIyYWYtZTQ2NGE2ODgxYzA0"
+          },
+          {
+            "node": {
+              "id": "24233cac-XXXX-XXXX-XXXX-fkd23432532d",
+              "title": "Intercom contacts to Salesforce",
+              "description": "New Intercom contacts to Salesforce",
+              "tags": ["sales"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [],
+              "authSlots": [
+                {
+                  "externalId": "external_intercom_authentication",
+                  "title": "Intercom authentication"
+                },
+                {
+                  "externalId": "external_salesforce_authentication",
+                  "title": "Salesforce authentication"
+                }
+              ]
+            },
+            "cursor": "LWIyYWYtZTQ2NGE2ODgxYzA0NlLWMdfjlADfljkdfad"
+          },
+          {
+            "node": {
+              "id": "52342dffd-XXXX-XXXX-XXXX-dfasdhkfh235lC",
+              "title": "New Salesforce Contacts to Marketo",
+              "description": "New Salesforce Contacts to Marketo Leads",
+              "tags": ["marketing", "sales"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [],
+              "authSlots": [
+                {
+                  "externalId": "external_marketo_authentication",
+                  "title": "Marketo authentication"
+                },
+                {
+                  "externalId": "external_salesforce_authentication",
+                  "title": "Salesforce authentication"
+                }
+              ]
+            },
+            "cursor": "MdfjlADfljkdfadf23451dFASfddsfadfwhjjl"
+          },
+          {
+            "node": {
+              "id": "28233cac-XXXX-XXXX-XXXX-ojkh4212adf342",
+              "title": "DocuSign to Google Drive",
+              "description": "New DocuSign signed documents to Google Drive",
+              "tags": ["revenue", "sales"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [],
+              "authSlots": [
+                {
+                  "externalId": "external_gdrive_authentication",
+                  "title": "Google Drive authentication"
+                },
+                {
+                  "externalId": "external_docusign_authentication",
+                  "title": "Docusign authentication"
+                }
+              ]
+            },
+            "cursor": "M2c1ZS00MTMjgyMzNjYWMtNNlLWIyYWYtZTQ2NGE2ODgxYzA0"
+          },
+          {
+            "node": {
+              "id": "28233cac-XXXX-XXXX-XXXX-gj39221lnc",
+              "title": "New Promoter NPS to Slack",
+              "description": "Post new NPS survey submissions to Slack",
+              "tags": ["customer_success", "revenue"],
+              "customFields": [
+                {
+                  "key": "my_custom_field",
+                  "value": "myCustomFieldValue"
+                }
+              ],
+              "configSlots": [],
+              "authSlots": [
+                {
+                  "externalId": "external_slack_authentication",
+                  "title": "Slack authentication"
+                }
+              ]
+            },
+            "cursor": "M2c1ZS00MlLWIyYWYtZTQ2NGE2ODgxYzA0TMjgyMzNjYWMtNNl"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": true,
+          "endCursor": "M2c1ZS00MlLWIyYWYtZTQ2NGE2ODgxYzA0TMjgyMzNjYWMtNNl",
+          "hasPreviousPage": false,
+          "startCursor": "MjgyMzNjYWMtNzc1ZS00MTNlLWIyYWYtZTQ2NGE2ODgxYzA0"
+        }
+      }
+    }
+  }
+}

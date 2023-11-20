@@ -1,0 +1,12 @@
+{
+  "data": {
+    "updateSolutionInstance": {
+      "solutionInstance": {
+        "id": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266",
+        "name": "myCustomersSolutionInstanceName",
+        "enabled": true,
+        "created": "2019-02-25T11:02:21.884Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "data": {
+    "users": {
+      "edges": [
+        {
+          "node": {
+            "name": "Michael Scott",
+            "id": "13b3ab9c-XXXX-XXXX-XXXX-c4dd07fbbfa4",
+            "externalUserId": "668341a0-160f-11ea-b50c-d3f55c9ba02b"
+          },
+          "cursor": "MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0"
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": "MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0",
+        "hasPreviousPage": false,
+        "startCursor": "MTNiM2FiOWMtZTIyMi00NzM5LWE2OWItYzRkZDA3ZmJiZmE0"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "data": {
+    "createSolutionInstance": {
+      "solutionInstance": {
+        "id": "625xxx-xxx-xxx-xxx-xxx111f",
+        "name": "Gene Salesforce to Slack instance",
+        "enabled": false,
+        "created": "2019-02-25T11:02:21.884Z",
+        "authValues": [
+          {
+            "externalId": "external_slack_authentication",
+            "authId": "dt7a77vd-XXXX-XXXX-XXXX-8d39g9da63jl"
+          },
+          {
+            "externalId": "external_salesforce_authentication",
+            "authId": "y3g9d637-XXXX-XXXX-XXXX-d03p7t78q2eg"
+          }
+        ]
+      }
+    }
+  }
+}

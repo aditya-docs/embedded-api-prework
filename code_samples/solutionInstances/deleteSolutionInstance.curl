@@ -1,0 +1,10 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <USER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation ($solutionInstanceId: ID!){\n  removeSolutionInstance(input: {solutionInstanceId: $solutionInstanceId}) {\n   clientMutationId\n }\n}",
+    "variables": {
+      "solutionInstanceId": "2d38b2ec-xxxx-xxx-xxxx-b4ec68084266"
+    }
+  }'

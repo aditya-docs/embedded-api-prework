@@ -1,0 +1,11 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation($name: String!, $externalUserId: String!) {\n  createExternalUser(input: { \n      name: $name, \n      externalUserId: $externalUserId  \n    }) {\n      userId\n  }\n}",
+    "variables": {
+      "name": "Dwight Schrute",
+      "externalUserId": "my-apps-user-id-for-dwight"
+    }
+  }'

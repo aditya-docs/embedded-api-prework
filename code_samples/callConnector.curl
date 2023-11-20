@@ -1,0 +1,13 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query": "mutation listLeads(\n  $connector: String!, \n  $version: String!, \n  $operation: String!, \n  $authId: String, \n){ listAllLeads: callConnector(input: {\n    connector: $connector,\n    version: $version,\n    operation: $operation,\n    authId: $authId,\n    input: \"{\\\"limit\\\":10,\\\"conditions_type\\\":\\\"Match all conditions\\\",\\\"fields\\\":[\\\"Id\\\",\\\"Name\\\"],\\\"object\\\":\\\"Lead\\\"}\"\n  }) {\n    output\n  }\n}",
+    "variables": {
+      "connector": "salesforce",
+      "version": "8.7",
+      "operation": "find_records",
+      "authId": "062af7e2-b5xxx-xxx-xxx-xxx-xxxxx46d912"
+    }
+  }'

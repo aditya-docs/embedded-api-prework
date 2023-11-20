@@ -1,0 +1,12 @@
+curl -i -X POST \
+  https://tray.io/graphql \
+  -H 'Authorization: Bearer <MASTER_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  -data '{
+    "query": "mutation ($exportedWorkflowsJson: String!, $targetWorkflowIds: [ID!], $clientMutationId: String) {\n\timportWorkflows (input: {\n  exportedWorkflowsJson: $exportedWorkflowsJson,\n  targetWorkflowIds: $targetWorkflowIds,\n  clientMutationId: $clientMutationId\n }) {\n  clientMutationId\n }\n}",
+    "variables": {
+      "exportedWorkflowsJson": "{\"tray_export_version\":4,\"export_type\":\"workflow\",\"workflows\":[{\"id\":\"ea3c20f5-xxxx-xxxx-xxxx-0ce2b7bb9f29\",\"created\":\"2023-05-15T11:26:14.794686Z\",\"workspace_id\":\"6c595d5b-xxxx-xxxx-xxxx-959ceb938eae\",\"creator\":\"6a4e56d9-xxxx-xxxx-xxxx-2429f79b40ff\",\"version\":{\"id\":\"018cc858-xxxx-xxxx-xxxx-2c8cfe0a7886\",\"created\":\"2023-05-16T22:25:42.413825Z\"},\"title\":\"webhook slack\",\"enabled\":false,\"tags\":[],\"settings\":{\"config\":{},\"input_schema\":{},\"output_schema\":{}},\"steps_structure\":[{\"name\":\"trigger\",\"type\":\"normal\",\"content\":{}}],\"steps\":{\"trigger\":{\"title\":\"Webhook\",\"connector\":{\"name\":\"webhook\",\"version\":\"2.3\"},\"operation\":\"fire_and_forget\",\"output_schema\":{},\"error_handling\":{},\"properties\":{}}},\"dependencies\":[]}],\"projects\":[]}",
+      "targetWorkflowIds": ["e5dc0748-xxxx-xxxx-xxxx-dfcc33795f12"],
+      "clientMutationId":"some-mutation-id"
+    }
+  }'
